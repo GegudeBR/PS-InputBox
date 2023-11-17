@@ -66,4 +66,4 @@ function InputBox {
   
 }
 
-Write-Host (InputBox -Title "Prompt for Computer Name:" -Question "Enter the name for the new computer")
+#Write-Host (InputBox -Title "Prompt for Computer Name:" -Question "Enter the name for the new computer")
