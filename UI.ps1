@@ -3,8 +3,20 @@ function InputBox {
     [String]$Title,
     [String]$Question
   )
-  $WindowWidth = 400
-  $WindowHeight = 150
+
+  # Load Windows Forms assembly
+  Add-Type -AssemblyName System.Windows.Forms
+
+  # Get the primary screen
+  $PrimaryScreen = [System.Windows.Forms.Screen]::PrimaryScreen
+
+  # Retrieve screen width and height
+  $ScreenWidth = $PrimaryScreen.Bounds.Width
+  $ScreenHeight = $PrimaryScreen.Bounds.Height
+
+
+  $WindowWidth = $ScreenWidth * (5/24)
+  $WindowHeight = $ScreenHeight * (1/8)
 
   $XLMPath = "$PSScriptRoot\ui.xml"
   $xamlContent = Get-Content -Path $XLMPath -Raw
@@ -53,6 +65,14 @@ function InputBox {
     $xamGUI.Close()  
   })
 
+  # Define the event handler for the Enter key press
+  $NameTextBox.Add_KeyDown({
+    if ($_.Key -eq "Enter") {
+      $xamGUI.Close()
+    }
+  })
+
+  # Define the event handler for the Cancel button click
   $CancelButton.Add_Click({
     $xamGUI.Close()  
     Exit 1
@@ -66,4 +86,4 @@ function InputBox {
   
 }
 
-#Write-Host (InputBox -Title "Prompt for Computer Name:" -Question "Enter the name for the new computer")
+Write-Host (InputBox -Title "Prompt for Computer Name:" -Question "Enter the name for the new computer")
