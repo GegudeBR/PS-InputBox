@@ -4,19 +4,8 @@ function InputBox {
     [String]$Question
   )
 
-  # Load Windows Forms assembly
-  Add-Type -AssemblyName System.Windows.Forms
-
-  # Get the primary screen
-  $PrimaryScreen = [System.Windows.Forms.Screen]::PrimaryScreen
-
-  # Retrieve screen width and height
-  $ScreenWidth = $PrimaryScreen.Bounds.Width
-  $ScreenHeight = $PrimaryScreen.Bounds.Height
-
-
-  $WindowWidth = $ScreenWidth * (5/24)
-  $WindowHeight = $ScreenHeight * (1/8)
+  $WindowWidth = 400
+  $WindowHeight = 150
 
   $XLMPath = "$PSScriptRoot\ui.xml"
   $xamlContent = Get-Content -Path $XLMPath -Raw
