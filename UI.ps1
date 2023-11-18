@@ -63,8 +63,8 @@ function InputBox {
 
   # Define the event handler for the Cancel button click
   $CancelButton.Add_Click({
+    $NameTextBox.Text = $null
     $xamGUI.Close()  
-    Exit 1
   })
 
 
